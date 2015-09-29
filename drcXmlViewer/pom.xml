@@ -1,0 +1,218 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>de.uni-koeln.spinfo.drc</groupId>
+	<artifactId>drcXmlViewer</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+
+	<!-- general properties -->
+	<properties>
+		<maven.compiler.source>1.7</maven.compiler.source>
+		<maven.compiler.target>1.7</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<!-- application properties -->
+		<application.title>DRC Xml-Viewer</application.title>
+		<spring.version>3.2.2.RELEASE</spring.version>
+		<slf4j.version>1.7.3</slf4j.version>
+		<jetty.default.port>8080</jetty.default.port>
+		<jetty.integration.port>9999</jetty.integration.port>
+		<jetty.version>8.1.9.v20130131</jetty.version>
+		<project.build.directory>../drcXmlViewer/target</project.build.directory>
+		<project.build.finalName>drcXmlViewer-${project.version}</project.build.finalName>
+		<!-- dependency versions -->
+		<lucene.version>4.2.0</lucene.version>
+	</properties>
+
+	<dependencies>
+
+		<!-- JAVAX Servlet 2.5 -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+		</dependency>
+
+		<!-- JAXB -->
+
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<version>2.2.9</version>
+		</dependency>
+
+		<!-- Required to upload files (import db) -->
+
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.2.2</version>
+		</dependency>
+
+		<!-- Spring -->
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-expression</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<!-- Spring Web MVC -->
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+			<optional>false</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator-annotation-processor</artifactId>
+			<version>4.1.0.Final</version>
+		</dependency>
+
+		<!-- slf4j -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+
+		<!-- Lucene -->
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-core</artifactId>
+			<version>${lucene.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-analyzers-common</artifactId>
+			<version>${lucene.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-queries</artifactId>
+			<version>${lucene.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-queryparser</artifactId>
+			<version>${lucene.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-highlighter</artifactId>
+			<version>${lucene.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-test-framework</artifactId>
+			<version>${lucene.version}</version>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+
+		<plugins>
+
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>${jetty.version}</version>
+				<configuration>
+					<contextXml>jetty-context.xml</contextXml>
+					<webAppConfig>
+						<baseResource implementation="org.eclipse.jetty.util.resource.ResourceCollection">
+							<resourcesAsCSV>${project.build.directory}/${project.build.finalName}</resourcesAsCSV>
+						</baseResource>
+						<descriptor>${project.build.directory}/${project.build.finalName}/WEB-INF/web.xml</descriptor>
+					</webAppConfig>
+					<classesDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes</classesDirectory>
+					<systemProperties>
+						<systemProperty>
+							<name>jetty.port</name>
+							<value>9999</value>
+						</systemProperty>
+					</systemProperties>
+					<stopPort>9991</stopPort>
+					<stopKey>test</stopKey>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<webResources>
+						<resource>
+							<directory>src/main/resources</directory>
+							<filtering>true</filtering>
+						</resource>
+						<!-- .jsp files are filtered, to insert -->
+						<!-- maven properties (build number etc) -->
+						<resource>
+							<directory>src/main/webapp</directory>
+							<includes>
+								<include>**/*.jsp</include>
+							</includes>
+							<filtering>true</filtering>
+						</resource>
+						<!-- all other files from webapp dir are -->
+						<!-- copied without filtering -->
+						<resource>
+							<directory>src/main/webapp</directory>
+							<excludes>
+								<excludes>**/*.jsp</excludes>
+							</excludes>
+							<filtering>false</filtering>
+						</resource>
+					</webResources>
+				</configuration>
+			</plugin>
+
+		</plugins>
+
+	</build>
+
+</project>
+

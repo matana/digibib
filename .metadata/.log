@@ -1,0 +1,51 @@
+!SESSION 2015-09-29 13:09:24.170 -----------------------------------------------
+eclipse.buildId=4.5.0.I20150603-2000
+java.version=1.8.0_45
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=de_DE
+Framework arguments:  -product org.eclipse.epp.package.java.product -keyring /Users/spinfo/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.epp.package.java.product -keyring /Users/spinfo/.eclipse_keyring -showlocation
+
+!ENTRY org.eclipse.core.net 1 0 2015-09-29 13:09:59.727
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.scout.sdk 1 0 2015-09-29 13:10:05.175
+!MESSAGE org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:771)
+	Starting SCOUT SDK Plugin.
+
+!ENTRY com.instantiations.eclipse 4 0 2015-09-29 13:11:09.752
+!MESSAGE Error stopping data source
+!STACK 0
+org.eclipse.swt.SWTException: Invalid thread access
+	at org.eclipse.swt.SWT.error(SWT.java:4491)
+	at org.eclipse.swt.SWT.error(SWT.java:4406)
+	at org.eclipse.swt.SWT.error(SWT.java:4377)
+	at org.eclipse.swt.widgets.Display.error(Display.java:1097)
+	at org.eclipse.swt.widgets.Display.createDisplay(Display.java:848)
+	at org.eclipse.swt.widgets.Display.create(Display.java:831)
+	at org.eclipse.swt.graphics.Device.<init>(Device.java:130)
+	at org.eclipse.swt.widgets.Display.<init>(Display.java:721)
+	at org.eclipse.swt.widgets.Display.<init>(Display.java:712)
+	at org.eclipse.swt.widgets.Display.getDefault(Display.java:1427)
+	at com.instantiations.eclipse.usageprofiler.ui.internal.datasources.WorkbenchPartDataSource.stopDataSource(WorkbenchPartDataSource.java:123)
+	at com.instantiations.eclipse.usageprofiler.ui.internal.UsageDataController.stopDataSource(UsageDataController.java:84)
+	at com.instantiations.eclipse.usageprofiler.ui.internal.UsageDataController.stopDataSources(UsageDataController.java:76)
+	at com.instantiations.eclipse.usageprofiler.ui.internal.UsageDataController.dispose(UsageDataController.java:45)
+	at com.instantiations.eclipse.usageprofiler.ui.UsageProfilerUIPlugin.stop(UsageProfilerUIPlugin.java:83)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$4.run(BundleContextImpl.java:827)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$4.run(BundleContextImpl.java:1)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.stop(BundleContextImpl.java:820)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.stopWorker0(EquinoxBundle.java:955)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$EquinoxModule.stopWorker(EquinoxBundle.java:323)
+	at org.eclipse.osgi.container.Module.doStop(Module.java:626)
+	at org.eclipse.osgi.container.Module.stop(Module.java:488)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.decStartLevel(ModuleContainer.java:1623)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1542)
+	at org.eclipse.osgi.container.SystemModule.stopWorker(SystemModule.java:248)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$SystemBundle$EquinoxSystemModule.stopWorker(EquinoxBundle.java:144)
+	at org.eclipse.osgi.container.Module.doStop(Module.java:626)
+	at org.eclipse.osgi.container.Module.stop(Module.java:488)
+	at org.eclipse.osgi.container.SystemModule.stop(SystemModule.java:186)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$SystemBundle$EquinoxSystemModule$1.run(EquinoxBundle.java:159)
+	at java.lang.Thread.run(Thread.java:745)
