@@ -6,22 +6,16 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<!-- general properties -->
 	<properties>
-		<maven.compiler.source>1.7</maven.compiler.source>
-		<maven.compiler.target>1.7</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<!-- application properties -->
-		<application.title>DRC Xml-Viewer</application.title>
-		<spring.version>3.2.2.RELEASE</spring.version>
+		<application.title>DigiBibb</application.title>
+		<spring.version>4.2.1.RELEASE</spring.version>
 		<slf4j.version>1.7.3</slf4j.version>
 		<jetty.default.port>8080</jetty.default.port>
-		<jetty.integration.port>9999</jetty.integration.port>
-		<jetty.version>8.1.9.v20130131</jetty.version>
+		<jetty.version>9.3.3.v20150827</jetty.version>
 		<project.build.directory>../drcXmlViewer/target</project.build.directory>
 		<project.build.finalName>drcXmlViewer-${project.version}</project.build.finalName>
-		<!-- dependency versions -->
 		<lucene.version>4.2.0</lucene.version>
 	</properties>
 
@@ -153,9 +147,8 @@
 	<build>
 
 		<plugins>
-
 			<plugin>
-				<groupId>org.mortbay.jetty</groupId>
+				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
 				<version>${jetty.version}</version>
 				<configuration>
@@ -207,6 +200,16 @@
 							<filtering>false</filtering>
 						</resource>
 					</webResources>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
 				</configuration>
 			</plugin>
 
